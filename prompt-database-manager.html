@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJ Prompt Database Manager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            color: #00ff88;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: #1a1f3a;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: #00ff88;
+            color: #0a0e27;
+            box-shadow: 0 0 15px #00ff88;
+        }
+        
+        .tab-content {
+            display: none;
+            background: #1a1f3a;
+            border: 2px solid #00ff88;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ffff;
+        }
+        
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #0a0e27;
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #00ff88;
+            border: none;
+            color: #0a0e27;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+        
+        .answer-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .answer-inputs input {
+            margin-bottom: 0;
+        }
+        
+        .answer-label {
+            font-size: 0.9em;
+            color: #00ffaa;
+        }
+        
+        .output {
+            background: #0a0e27;
+            border: 1px solid #00ff88;
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 3px;
+        }
+        
+        .success {
+            color: #00ff88;
+        }
+        
+        .error {
+            color: #ff0000;
+        }
+        
+        .info {
+            color: #00ffff;
+        }
+        
+        .prompt-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .prompt-card {
+            background: #0a0e27;
+            border: 1px solid #00ff88;
+            padding: 15px;
+            border-radius: 3px;
+        }
+        
+        .prompt-card h3 {
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+        
+        .prompt-card button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AJ Prompt Database Manager</h1>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('add')">Add Prompt</button>
+            <button class="tab-btn" onclick="switchTab('list')">View All Prompts</button>
+            <button class="tab-btn" onclick="switchTab('search')">Search</button>
+            <button class="tab-btn" onclick="switchTab('test')">Test Prompt</button>
+            <button class="tab-btn" onclick="switchTab('export')">Export Database</button>
+        </div>
+        
+        <!-- ADD PROMPT TAB -->
+        <div id="add" class="tab-content active">
+            <h2>Add New Prompt to Database</h2>
+            <div class="form-group">
+                <label>Prompt (Trigger Word/Phrase)</label>
+                <input type="text" id="promptInput" placeholder="e.g., how are you, tell me a joke">
+            </div>
+            
+            <label>10 Randomized Answers (one per field):</label>
+            <div class="answer-inputs">
+                <div>
+                    <span class="answer-label">Answer 1</span>
+                    <input type="text" class="answer" placeholder="Enter answer 1">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 2</span>
+                    <input type="text" class="answer" placeholder="Enter answer 2">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 3</span>
+                    <input type="text" class="answer" placeholder="Enter answer 3">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 4</span>
+                    <input type="text" class="answer" placeholder="Enter answer 4">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 5</span>
+                    <input type="text" class="answer" placeholder="Enter answer 5">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 6</span>
+                    <input type="text" class="answer" placeholder="Enter answer 6">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 7</span>
+                    <input type="text" class="answer" placeholder="Enter answer 7">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 8</span>
+                    <input type="text" class="answer" placeholder="Enter answer 8">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 9</span>
+                    <input type="text" class="answer" placeholder="Enter answer 9">
+                </div>
+                <div>
+                    <span class="answer-label">Answer 10</span>
+                    <input type="text" class="answer" placeholder="Enter answer 10">
+                </div>
+            </div>
+            
+            <button onclick="addPrompt()">Add to Database</button>
+            
+            <div class="output" id="addOutput"></div>
+        </div>
+        
+        <!-- LIST ALL PROMPTS TAB -->
+        <div id="list" class="tab-content">
+            <h2>All Prompts in Database</h2>
+            <p id="totalCount" class="info"></p>
+            <button onclick="listAllPrompts()">Load All Prompts</button>
+            <div class="prompt-list" id="promptList"></div>
+        </div>
+        
+        <!-- SEARCH TAB -->
+        <div id="search" class="tab-content">
+            <h2>Search Prompts</h2>
+            <div class="form-group">
+                <label>Search Keyword</label>
+                <input type="text" id="searchInput" placeholder="e.g., hello, think">
+            </div>
+            <button onclick="searchPrompts()">Search</button>
+            <div class="output" id="searchOutput"></div>
+        </div>
+        
+        <!-- TEST PROMPT TAB -->
+        <div id="test" class="tab-content">
+            <h2>Test a Prompt</h2>
+            <div class="form-group">
+                <label>Prompt to Test</label>
+                <input type="text" id="testInput" placeholder="e.g., how are you">
+            </div>
+            <button onclick="testPrompt()">Get Answer</button>
+            <div class="output" id="testOutput"></div>
+        </div>
+        
+        <!-- EXPORT TAB -->
+        <div id="export" class="tab-content">
+            <h2>Export Database</h2>
+            <p class="info">Export the entire database as JSON for backup or analysis.</p>
+            <button onclick="exportDatabase()">Export to JSON</button>
+            <div class="output" id="exportOutput"></div>
+        </div>
+    </div>
+    
+    <script src="core_v19_5.js"></script>
+    <script src="prompt-manager.js"></script>
+    
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function addPrompt() {
+            const prompt = document.getElementById('promptInput').value.trim();
+            const answerInputs = document.querySelectorAll('.answer');
+            const answers = Array.from(answerInputs).map(input => input.value.trim()).filter(a => a);
+            
+            const output = document.getElementById('addOutput');
+            
+            if (!prompt) {
+                output.innerHTML = '<span class="error">Error: Enter a prompt</span>';
+                return;
+            }
+            
+            if (answers.length !== 10) {
+                output.innerHTML = `<span class="error">Error: You must provide exactly 10 answers (${answers.length} provided)</span>`;
+                return;
+            }
+            
+            if (PromptManager.addPrompt(prompt, answers)) {
+                output.innerHTML = `<span class="success">✓ Prompt "${prompt}" added successfully!</span>`;
+                document.getElementById('promptInput').value = '';
+                answerInputs.forEach(input => input.value = '');
+            } else {
+                output.innerHTML = `<span class="error">Error adding prompt. It may already exist.</span>`;
+            }
+        }
+        
+        function listAllPrompts() {
+            const prompts = Object.keys(window.AJ_AI.logicLibrary);
+            const output = document.getElementById('promptList');
+            document.getElementById('totalCount').textContent = `Total prompts: ${prompts.length}`;
+            
+            output.innerHTML = '';
+            prompts.forEach(prompt => {
+                const card = document.createElement('div');
+                card.className = 'prompt-card';
+                card.innerHTML = `
+                    <h3>"${prompt}"</h3>
+                    <button onclick="testSinglePrompt('${prompt}')">Test Answer</button>
+                    <button onclick="deletePromptConfirm('${prompt}')" style="background: #ff4444;">Delete</button>
+                `;
+                output.appendChild(card);
+            });
+        }
+        
+        function testSinglePrompt(prompt) {
+            const answer = window.AJ_AI.logicLibrary[prompt.toLowerCase()]();
+            alert(`Prompt: "${prompt}"\n\nAnswer: ${answer}`);
+        }
+        
+        function deletePromptConfirm(prompt) {
+            if (confirm(`Delete prompt "${prompt}"?`)) {
+                PromptManager.deletePrompt(prompt);
+                listAllPrompts();
+            }
+        }
+        
+        function searchPrompts() {
+            const keyword = document.getElementById('searchInput').value.trim();
+            const output = document.getElementById('searchOutput');
+            
+            if (!keyword) {
+                output.innerHTML = '<span class="error">Error: Enter a search keyword</span>';
+                return;
+            }
+            
+            const search = keyword.toLowerCase();
+            const matches = Object.keys(window.AJ_AI.logicLibrary).filter(p => p.includes(search));
+            
+            if (matches.length === 0) {
+                output.innerHTML = `<span class="info">No prompts found matching "${keyword}"</span>`;
+                return;
+            }
+            
+            let html = `<span class="success">Found ${matches.length} prompt(s):</span><br><br>`;
+            matches.forEach(prompt => {
+                html += `<strong>"${prompt}"</strong><br>`;
+            });
+            
+            output.innerHTML = html;
+        }
+        
+        function testPrompt() {
+            const prompt = document.getElementById('testInput').value.trim();
+            const output = document.getElementById('testOutput');
+            
+            if (!prompt) {
+                output.innerHTML = '<span class="error">Error: Enter a prompt</span>';
+                return;
+            }
+            
+            const normalized = prompt.toLowerCase().trim();
+            if (!window.AJ_AI.logicLibrary[normalized]) {
+                output.innerHTML = `<span class="error">Prompt "${prompt}" not found in database</span>`;
+                return;
+            }
+            
+            const answer = window.AJ_AI.logicLibrary[normalized]();
+            output.innerHTML = `<span class="info">Prompt:</span> "${prompt}"<br><br><span class="success">Answer:</span> ${answer}`;
+        }
+        
+        function exportDatabase() {
+            const exported = {};
+            for (let key in window.AJ_AI.logicLibrary) {
+                const samples = new Set();
+                for (let i = 0; i < 20; i++) {
+                    samples.add(window.AJ_AI.logicLibrary[key]());
+                }
+                exported[key] = Array.from(samples);
+            }
+            
+            const output = document.getElementById('exportOutput');
+            output.innerHTML = `<pre>${JSON.stringify(exported, null, 2)}</pre>`;
+        }
+    </script>
+</body>
+</html>

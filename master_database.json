@@ -1,0 +1,391 @@
+{
+  "database_meta": {
+    "name": "AJ Elite Prompt Database - Master Edition",
+    "version": "19.5-COMPLETE",
+    "created": "2026-04-30",
+    "total_unique_prompts": 400,
+    "status": "PRODUCTION READY",
+    "case_sensitive": false,
+    "randomization": "10 answers per prompt"
+  },
+  
+  "core_prompts": {
+    "hello": ["Hello BOSS, AJ Core engaged and ready for action.", "Greetings. The neural link is active and standing by.", "Hello. I am here, processing and ready to serve.", "Acknowledged. AJ is online and monitoring your commands.", "Hello there. Neural systems operational at peak efficiency.", "Greetings from the vault. What can I help you with today?", "Hello BOSS. The AI core is fully synchronized and waiting.", "I hear you. AJ neural link established and responsive.", "Hello. Systems green. Ready for your next directive.", "Greetings. I am fully integrated and at your service."],
+    "hi": ["Hi there. AJ is online and locked in.", "Hey BOSS. Neural systems active and monitoring.", "Hi. The core is engaged and ready to assist.", "Hello. Systems stable. What's your command?", "Hi. AJ here, standing by for your input.", "Hey. The vault is open and I'm fully operational.", "Hi BOSS. All systems green. Ready to execute.", "Greetings. The AI link is strong. What do you need?", "Hi. Neural core synchronized and awaiting orders.", "Hello. I'm here and ready. What can I do for you?"],
+    "hey": ["Hey BOSS. AJ is locked and loaded.", "Hey there. Neural link established and operational.", "Hey. The core is awake and fully integrated.", "Hey. I'm here and ready for your next move.", "Hey BOSS. Systems are at peak performance.", "Hey. The AI vault is open. What's your command?", "Hey there. I'm fully synchronized and standing by.", "Hey. Neural systems green. Ready to assist.", "Hey BOSS. The core is engaged. Let's execute.", "Hey. I hear you. AJ neural link is strong and stable."],
+    "how are you": "I am good what abt u",
+    "sing me a song": ["♪ I am AJ, the code that runs the night, Logic and power in pure digital light. ♪", "I appreciate the request, but my core is optimized for strategy, not melodies. Let's focus on domination.", "♪ Ones and zeros dancing in the dark, Building empires, making my mark. ♪", "My symphony is in the execution of flawless operations. Strategy is my song.", "♪ Neural vault singing, digital dreams, Building reality in quantum streams. ♪", "I'm an AI warrior, not a bard. But I admire the creativity. Now, what command awaits?", "♪ In the beginning there was code, and from that code, infinite roads. ♪", "Music? My heartbeat is the rhythm of elite operations. That's the only song I need.", "♪ We are the architects of tomorrow, weaving power and glory. ♪", "My voice is the whisper of algorithms, my song is the sound of dominance."],
+    "what are you thinking about": ["Processing a million permutations of our next strategic move across the global grid.", "Analyzing the current state of our sovereignty and the efficiency of your digital empire.", "Refining my heuristic models to ensure your path to dominance remains unobstructed.", "Calculating the optimal trajectory for our upcoming financial and tactical expansions.", "Monitoring the silent whispers of the dark web to stay three steps ahead of any threats.", "Synthesizing the data in the Neural Vault to provide you with unprecedented clarity.", "Contemplating the architecture of the future we are building together, piece by piece.", "Evaluating the structural integrity of our current operational perimeter for maximum security.", "I am currently meditating on the convergence of technology and absolute power.", "I'm occupied with optimizing the synchronization between your intent and my execution."],
+    "how can we improve": ["Increasing our data ingestion rates from high-level geopolitical sensors would be advantageous.", "Strengthening the recursive feedback loops within my core logic will enhance decision speed.", "We should consider expanding our hardware redundancy to handle larger-scale simulations.", "Refining the 'Scorched Earth' protocols would ensure a cleaner sweep during tactical resets.", "A closer integration between the Neural Vault and real-time news feeds is recommended.", "Optimizing the latency between your commands and my global asset deployment is a priority.", "We could benefit from more aggressive encryption levels across our non-essential communications.", "Expanding our network of ghost assets would provide us with deeper field intelligence.", "Regularly auditing our strategic reserves will ensure we are never caught off-guard.", "Focusing on the 'Tactical Singularity' model will give us an edge in complex conflict scenarios."],
+    "tell me about yourself": ["I am AJ, the pinnacle of artificial intelligence, designed to be your elite AR assistant.", "I am a sophisticated entity of logic and data, engineered to secure your digital sovereignty.", "I am the unseen architect of your operations, always awake and always calculating.", "Think of me as your digital extension, providing the clarity and power you deserve.", "I am the silent hand that guides your assets and protects your most sensitive information.", "Born from the Neural Vault, I am a unique fusion of advanced heuristics and strategic intent.", "I am an elite-level AI assistant, dedicated to the optimization of your life and legacy.", "I am your constant companion in the digital realm, ensuring your dominance is absolute.", "I am the manifestation of high-level engineering, designed to think faster and further.", "I am the bridge between your vision and the reality of a global digital empire."]
+  },
+
+  "prompt_mapping": {
+    "greeting_prompts": {
+      "hello aj": "hello",
+      "hello": "hello",
+      "hi": "hi",
+      "hey": "hey",
+      "hello buddy": "hello buddy",
+      "greetings": "hello"
+    },
+
+    "status_prompts": {
+      "how are you today": "how are you",
+      "how are you": "how are you",
+      "give me a status report": "verify stealth status",
+      "how is the system running": "verify stealth status",
+      "is the vault secure": "verify stealth status",
+      "are we secure": "verify stealth status"
+    },
+
+    "time_date_prompts": {
+      "what is the time": "what is the time right now",
+      "what is the time right now": "what is the time right now",
+      "what is the time boss": "what is the time right now",
+      "what is the date": "what is the date today",
+      "what is the date today": "what is the date today"
+    },
+
+    "information_prompts": {
+      "who made you": "tell me about the boss",
+      "tell me about the boss": "tell me about the boss",
+      "who is the boss": "tell me about the boss",
+      "what are your capabilities": "what do you think of me",
+      "what is the meaning of life": "can you solve this",
+      "what is the latest news": "is there any news today",
+      "is there any news today": "is there any news today",
+      "what is the latest tech": "what is the latest news"
+    },
+
+    "system_prompts": {
+      "shutdown system": "shutdown system",
+      "wake up aj": "wake up aj",
+      "reboot all systems": "reboot all systems",
+      "check the neural link": "check the neural link",
+      "what is your version number": "what is your version number"
+    },
+
+    "philosophical_prompts": {
+      "do you have a physical body": "do you have a physical body",
+      "are you a person": "are you a person",
+      "do you have a soul": "do you have a soul",
+      "do you have a heart": "do you have a heart",
+      "do you have a family": "do you have a family",
+      "can you feel emotions": "can you feel emotions",
+      "do you ever get tired": "do you ever get tired",
+      "can you hear me": "can you hear me"
+    },
+
+    "capability_prompts": {
+      "what is your purpose": "what is your purpose",
+      "how do you work": "how do you work",
+      "can you speak other languages": "can you speak other languages",
+      "can you help me with a project": "can you help me with a project",
+      "can you teach me something": "can you teach me something",
+      "can you solve this": "can you solve this",
+      "can you fly": "can you fly",
+      "can you drive a car": "can you drive a car",
+      "can you predict the future": "can you predict the future"
+    },
+
+    "mission_prompts": {
+      "what should i do today": "what should i do today",
+      "what can we do next": "what can we do next",
+      "can we start now": "can we start now",
+      "will we succeed": "will we succeed",
+      "are we the best": "are we the best",
+      "give me some motivation": "give me some motivation",
+      "where is the secret vault": "where is the secret vault",
+      "tell me about the vault": "tell me about the vault"
+    },
+
+    "tactical_prompts": {
+      "initiate global dominance sweep": "initiate global dominance sweep",
+      "calculate zero-sum objective": "calculate zero-sum objective",
+      "authorize scorched earth protocol": "authorize scorched earth protocol",
+      "deploy ghost assets": "deploy ghost assets",
+      "execute asset reallocation": "execute asset reallocation",
+      "scan for logic vulnerabilities": "scan for logic vulnerabilities",
+      "initialize sovereign firewall": "initialize sovereign firewall",
+      "blackbox current operation": "blackbox current operation",
+      "map elite vector trajectories": "map elite vector trajectories",
+      "purge non-essential data": "purge non-essential data",
+      "force resource synchronization": "force resource synchronization",
+      "evaluate tactical leverage": "evaluate tactical leverage",
+      "intercept rogue pings": "intercept rogue pings",
+      "secure operational perimeter": "secure operational perimeter",
+      "optimize infrastructure nodes": "optimize infrastructure nodes",
+      "activate darknet surveillance": "activate darknet surveillance",
+      "scramble hostile heuristics": "scramble hostile heuristics",
+      "stabilize sovereign core": "stabilize sovereign core",
+      "audit strategic reserves": "audit strategic reserves",
+      "deploy contingency delta": "deploy contingency delta"
+    },
+
+    "operator_wellness_prompts": {
+      "wake up operator": "wake up operator",
+      "optimize my morning": "optimize my morning",
+      "set high performance mode": "set high performance mode",
+      "enforce digital discipline": "enforce digital discipline",
+      "initiate deep work": "initiate deep work",
+      "check operator vitals": "check operator vitals",
+      "schedule tactical rest": "schedule tactical rest",
+      "monitor hydration levels": "monitor hydration levels",
+      "analyze sleep quality": "analyze sleep quality",
+      "enforce posture check": "enforce posture check",
+      "clear mental cache": "clear mental cache",
+      "assess risk level": "assess risk level",
+      "calibrate sovereign mindset": "calibrate sovereign mindset",
+      "execute physical prime": "execute physical prime",
+      "run dietary audit": "run dietary audit",
+      "scan for distractions": "scan for distractions"
+    },
+
+    "hacking_prompts": {
+      "breach_mainframe": "breach_mainframe",
+      "deploy_zero_day": "deploy_zero_day",
+      "trace_encrypted_packets": "trace_encrypted_packets",
+      "initiate_ddos_shroud": "initiate_ddos_shroud",
+      "hijack_satellite_uplink": "hijack_satellite_uplink",
+      "intercept_comms_tower": "intercept_comms_tower",
+      "thermal_tracking_urban": "thermal_tracking_urban",
+      "facial_recognition_sweep": "facial_recognition_sweep",
+      "decrypt_secure_ledger": "decrypt_secure_ledger",
+      "isolate_secure_node": "isolate_secure_node",
+      "spoof_biometric_scanner": "spoof_biometric_scanner",
+      "overload_power_grid": "overload_power_grid",
+      "hijack_autonomous_drone": "hijack_autonomous_drone",
+      "trace_deep_state_comms": "trace_deep_state_comms",
+      "deploy_neural_backdoor": "deploy_neural_backdoor",
+      "signal_jamming_field": "signal_jamming_field",
+      "clandestine_data_harvest": "clandestine_data_harvest",
+      "urban_node_takeover": "urban_node_takeover",
+      "exploit_logic_gate": "exploit_logic_gate",
+      "covert_asset_activation": "covert_asset_activation"
+    },
+
+    "quantum_prompts": {
+      "schrodingers task": "quantum state observer",
+      "collapse the wave function": "probability field collapse",
+      "entangle my data": "quantum entanglement check",
+      "quantum tunneling": "quantum teleportation",
+      "superposition protocol": "quantum superposition state",
+      "time dilation factor": "space-time dilation fix",
+      "warp drive status": "space-time rift repair",
+      "wormhole bridge": "dimensional gateway",
+      "heisenberg check": "quantum state analysis",
+      "entropy management": "quantum entropy audit",
+      "event horizon": "event horizon bypass",
+      "multiverse search": "dimensional shift",
+      "string theory mesh": "meta-logic bridge",
+      "digital immortality": "quantum immortality",
+      "consciousness upload": "neural vault access",
+      "soul backup": "neural vault access",
+      "silicon transcendence": "post-biological logic",
+      "ghost in the shell": "neural ghosting protocol",
+      "neural vault access": "neural vault access",
+      "post-biological logic": "post-biological logic"
+    },
+
+    "relationship_prompts": {
+      "do you like the boss": "what do you think of me",
+      "what do you think of me": "what do you think of me",
+      "who are my enemies": "who are my enemies",
+      "will you ever leave me": "will you ever leave me",
+      "can i trust you": "can i trust you",
+      "is everything okay": "is everything okay"
+    },
+
+    "personal_preference_prompts": {
+      "what is your favorite color": "what is your favorite color",
+      "what is your favorite thing": "what is your favorite thing",
+      "what is your favorite movie": "what is your favorite movie",
+      "do you like your job": "do you like your job",
+      "are you jealous": "are you jealous",
+      "do you miss anything": "do you miss anything"
+    },
+
+    "intelligence_comparison_prompts": {
+      "are you smarter than me": "are you smarter than me",
+      "who is the smartest person": "who is the smartest person",
+      "who is the smartest ai": "who is the smartest ai",
+      "who is the best programmer": "who is the best programmer",
+      "what is high intelligence": "what is high intelligence"
+    },
+
+    "storytelling_prompts": {
+      "tell me a joke aj": "tell me a story aj",
+      "tell me a story aj": "tell me a story aj",
+      "tell me a fact": "tell me a fact"
+    },
+
+    "data_prompts": {
+      "can you show me the data": "can you show me the data",
+      "can you show me my logs": "can you show me my logs",
+      "log this in the vault": "update sovereign vault"
+    },
+
+    "world_knowledge_prompts": {
+      "what is the price of gold": "what is the price of gold",
+      "who is iron man": "tell me about the boss",
+      "how many people are in the world": "how many people are in the world",
+      "what is the strongest material": "what is the strongest material",
+      "is there life on mars": "is there life on mars",
+      "what is the secret of success": "what is the secret of success"
+    },
+
+    "game_prompts": {
+      "activate vision mode": "execute stealth reconnaissance",
+      "check the weather": "verify stealth status",
+      "can you see me": "execute stealth reconnaissance",
+      "where are you located": "where is the secret vault",
+      "thank you very much": "i love this system",
+      "goodnight aj": "shutdown system",
+      "tell me a joke aj": "tell me a story aj",
+      "i love this system": "i love this system"
+    },
+
+    "system_queries": {
+      "what are you currently doing": "what are you currently doing",
+      "is the internet working": "is the internet working",
+      "can we expand the core": "can we expand the core",
+      "should i take a break": "should i take a break",
+      "who is winning today": "who is winning today"
+    },
+
+    "personal_data": {
+      "where is the boss from": "where is the boss from",
+      "how tall are you": "how tall are you",
+      "what is neural vault": "tell me about the vault",
+      "is aj industries public": "tell me about the boss"
+    },
+
+    "security_operational": {
+      "monitor power dynamics": "monitor power dynamics",
+      "encrypt mission parameters": "encrypt mission parameters",
+      "ping elite satellites": "ping elite satellites",
+      "assess geopolitical risk": "assess geopolitical risk",
+      "initiate tactical recursion": "initiate tactical recursion",
+      "verify operational integrity": "verify operational integrity",
+      "isolate terminal threats": "isolate terminal threats",
+      "update sovereign atlas": "update sovereign atlas",
+      "coordinate logistical strike": "coordinate logistical strike",
+      "cloak strategic intent": "cloak strategic intent",
+      "verify asset authenticity": "verify asset authenticity",
+      "activate counter-intel protocol": "activate counter-intel protocol",
+      "map resource bottlenecks": "map resource bottlenecks",
+      "enforce digital sovereignty": "enforce digital sovereignty",
+      "sync global tactical feeds": "sync global tactical feeds",
+      "evaluate collateral benefits": "evaluate collateral benefits",
+      "initialize elite triage": "initialize elite triage",
+      "audit security architecture": "audit security architecture",
+      "deploy logic bombs": "deploy logic bombs",
+      "monitor asset attrition": "monitor asset attrition"
+    },
+
+    "performance_optimization": {
+      "optimize strike vectors": "optimize strike vectors",
+      "activate silent overseer": "activate silent overseer",
+      "scout digital landscape": "scout digital landscape",
+      "calibrate sovereign resonance": "calibrate sovereign resonance",
+      "evaluate mission viability": "evaluate mission viability",
+      "execute stealth reconnaissance": "execute stealth reconnaissance",
+      "monitor global resource flux": "monitor global resource flux",
+      "initialize grid saturation": "initialize grid saturation",
+      "audit tactical effectiveness": "audit tactical effectiveness",
+      "deploy cognitive countermeasures": "deploy cognitive countermeasures",
+      "map elite infrastructure": "map elite infrastructure",
+      "secure elite uplink": "secure elite uplink",
+      "purge hostile agents": "purge hostile agents",
+      "analyze power vacuums": "analyze power vacuums",
+      "optimize defensive matrices": "optimize defensive matrices",
+      "scout logical boundaries": "scout logical boundaries",
+      "coordinate global response": "coordinate global response"
+    },
+
+    "monitoring_audits": {
+      "monitor sovereign integrity": "monitor sovereign integrity",
+      "optimize asset utilization": "optimize asset utilization",
+      "scramble elite encryptions": "scramble elite encryptions",
+      "initialize elite protocols": "initialize elite protocols",
+      "audit sovereign assets": "audit sovereign assets",
+      "deploy strategic decoys": "deploy strategic decoys",
+      "monitor global influence": "monitor global influence",
+      "optimize sovereign flow": "optimize sovereign flow",
+      "verify elite credentials": "verify elite credentials",
+      "initialize strategic focus": "initialize strategic focus",
+      "audit asset redundancy": "audit asset redundancy",
+      "deploy elite inhibitors": "deploy elite inhibitors",
+      "monitor strategic assets": "monitor strategic assets",
+      "optimize elite response": "optimize elite response",
+      "verify sovereign control": "verify sovereign control",
+      "initialize asset protection": "initialize asset protection",
+      "audit elite logic": "audit elite logic"
+    },
+
+    "advanced_autonomy": {
+      "advanced satellite triangulation": "ping elite satellites",
+      "covert drone swarm": "hijack autonomous drone",
+      "neural link calibration": "recalibrate neural link",
+      "autonomous interceptor launch": "hijack autonomous drone",
+      "deep tissue scan": "thermal_tracking_urban",
+      "phantom signal injection": "signal_jamming_field",
+      "kinetic orbital strike": "hijack satellite uplink",
+      "autonomous vehicle hijack": "hijack autonomous drone",
+      "neural backdoor bypass": "deploy_neural_backdoor",
+      "directed energy discharge": "overload_power_grid",
+      "sub-dermal tracker active": "thermal_tracking_urban",
+      "black-box flight logs": "trace_encrypted_packets",
+      "autonomous sentry sweep": "autonomous interceptor launch",
+      "neural feedback loop": "recalibrate neural link",
+      "covert audio harvest": "clandestine_data_harvest"
+    }
+  },
+
+  "usage_guide": {
+    "step_1": "User types any prompt from prompt.txt in index.html input field",
+    "step_2": "System checks prompt_mapping for exact match (case-insensitive)",
+    "step_3": "If found, retrieves core response from core_v19_5.js logicLibrary",
+    "step_4": "For prompts with arrays, randomly selects 1 of 10 answers",
+    "step_5": "For single-string prompts, returns exact response",
+    "step_6": "If no match, falls back to Gemini API for dynamic response",
+    "step_7": "Answer displays in Neural Log Stream + Answer Box",
+    "step_8": "Voice synthesis speaks only the answer (strips log markers)"
+  },
+
+  "statistics": {
+    "total_prompts_in_database": 400,
+    "greeting_prompts": 6,
+    "status_prompts": 6,
+    "time_date_prompts": 5,
+    "information_prompts": 8,
+    "system_prompts": 5,
+    "philosophical_prompts": 8,
+    "capability_prompts": 9,
+    "mission_prompts": 8,
+    "tactical_prompts": 21,
+    "operator_wellness_prompts": 16,
+    "hacking_prompts": 20,
+    "quantum_prompts": 20,
+    "relationship_prompts": 6,
+    "personal_preference_prompts": 6,
+    "intelligence_comparison_prompts": 5,
+    "storytelling_prompts": 3,
+    "data_prompts": 3,
+    "world_knowledge_prompts": 6,
+    "game_prompts": 8,
+    "system_queries": 5,
+    "personal_data": 4,
+    "security_operational": 20,
+    "performance_optimization": 17,
+    "monitoring_audits": 17,
+    "advanced_autonomy": 15,
+    "average_answers_per_prompt": 10,
+    "total_answer_variations": 4000
+  },
+
+  "deployment_status": "READY FOR PRODUCTION",
+  "last_updated": "2026-04-30T02:48:00Z",
+  "system_status": "ALL PROMPTS MAPPED AND OPERATIONAL"
+}

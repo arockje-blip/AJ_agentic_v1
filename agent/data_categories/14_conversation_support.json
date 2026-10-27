@@ -1,0 +1,22 @@
+{
+  "category": "conversation_support",
+  "description": "Light emotional check-ins and encouragement. Route to LLM with a warm, supportive tone; NOT a substitute for real mental health support \u2014 keep responses supportive, never clinical or diagnostic.",
+  "count": 15,
+  "prompts": [
+    "i want to celebrate a small win",
+    "talk me through this decision",
+    "i'm excited about this idea",
+    "help me stay motivated",
+    "i'm proud of finishing my project",
+    "i need some encouragement",
+    "help me reframe this setback",
+    "i'm anxious about the future",
+    "i'm not sure if i'm on the right path",
+    "i had a rough day",
+    "i'm overwhelmed with deadlines",
+    "i feel stuck on this problem",
+    "i'm nervous about a presentation",
+    "i'm doubting myself",
+    "i'm feeling stressed about exams"
+  ]
+}

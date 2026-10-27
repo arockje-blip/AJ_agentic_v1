@@ -1,0 +1,1616 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJ | AJ INDUSTRIES NEURAL LINK</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+    :root { 
+        --aj-primary: #00f2ff; 
+        --aj-secondary: #0099cc;
+        --aj-accent: #e6f1ff;
+        --aj-glow: rgba(0, 242, 255, 0.6);
+        --aj-bg: #010409;
+        --aj-dark: #0d1b2a;
+    }
+    
+    body { 
+        background: radial-gradient(circle at center, var(--aj-dark) 0%, var(--aj-bg) 100%);
+        color: var(--aj-primary); 
+        font-family: 'Rajdhani', sans-serif;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+    }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 210, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 150, 200, 0.03) 0%, transparent 50%),
+                linear-gradient(rgba(0, 242, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 80px 80px, 80px 80px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .aj-font { font-family: 'Orbitron', sans-serif; letter-spacing: 0.15em; text-shadow: 0 0 10px var(--aj-glow); }
+        
+        /* SCANLINES EFFECT */
+        .scanline {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 242, 255, 0.02) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 999;
+            animation: flicker 0.1s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 0.95; }
+            50% { opacity: 1; }
+        }
+        
+        /* MAIN CONTAINER */
+        .aj-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* CENTRAL HOLOGRAPHIC CORE */
+        .holo-core {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            z-index: 50;
+        }
+        
+        .core-shape {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid var(--aj-primary);
+            box-shadow: 0 0 30px var(--aj-glow), inset 0 0 30px var(--aj-glow);
+            animation: pulse-core 2s ease-in-out infinite;
+            clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); /* Hexagon */
+        }
+        
+        .core-shape-1 { 
+            width: 300px; height: 300px; 
+            animation-delay: 0s; 
+            border-color: rgba(0, 242, 255, 0.4); 
+            clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+        }
+        
+        .core-shape-2 { 
+            width: 220px; height: 220px; 
+            animation-delay: 0.3s; 
+            border-style: dotted; 
+            border-width: 2px;
+            clip-path: polygon(25% 5%, 75% 5%, 95% 50%, 75% 95%, 25% 95%, 5% 50%); /* Octagon approx */
+            animation: rotate-reverse 15s linear infinite;
+        }
+        
+        .core-shape-3 { 
+            width: 120px; height: 120px; 
+            animation-delay: 0.6s; 
+            background: rgba(0, 242, 255, 0.15);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Star shape */
+        }
+        
+        @keyframes pulse-core {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        /* MULTI-SIDED ARC REACTOR CENTER */
+        .arc-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            background: radial-gradient(circle, rgba(230, 241, 255, 0.6) 0%, transparent 80%);
+            border: 2px solid var(--aj-primary);
+            box-shadow: 
+                0 0 60px var(--aj-glow),
+                inset 0 0 30px var(--aj-glow);
+            z-index: 10;
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%); /* Heptagon */
+            animation: rotate-arc 12s linear infinite;
+        }
+
+        /* SYMMETRICAL LIGHT BEAMS / SHRINKS */
+        .arc-center::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 150%; height: 150%;
+            transform: translate(-50%, -50%);
+            background: 
+                conic-gradient(from 0deg, 
+                    transparent 0deg, 
+                    rgba(0, 242, 255, 0.3) 15deg, 
+                    transparent 30deg,
+                    transparent 90deg,
+                    rgba(0, 242, 255, 0.3) 105deg,
+                    transparent 120deg,
+                    transparent 180deg,
+                    rgba(0, 242, 255, 0.3) 195deg,
+                    transparent 210deg,
+                    transparent 270deg,
+                    rgba(0, 242, 255, 0.3) 285deg,
+                    transparent 300deg
+                );
+            animation: beam-pulse 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes beam-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(45deg); opacity: 0.8; }
+        }
+
+        /* ADDITIONAL HUD GLITCH ELEMENTS */
+        .hud-corner {
+            position: absolute;
+            width: 60px; height: 60px;
+            border: 1px solid var(--aj-primary);
+            z-index: 100;
+            opacity: 0.6;
+        }
+        .top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+        .bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+        .bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+        
+        .floating-data {
+            position: absolute;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--aj-primary);
+            font-family: 'Orbitron', sans-serif;
+            animation: float-data 10s linear infinite;
+        }
+
+        @keyframes float-data {
+            from { transform: translateY(100vh); opacity: 1; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+        
+        .arc-center::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--aj-accent) 0%, rgba(0, 242, 255, 0.4) 70%, transparent 100%);
+            animation: pulse-inner 1.2s ease-in-out infinite;
+        }
+        
+        @keyframes rotate-arc {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        @keyframes pulse-inner {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* ARC REACTOR STATES */
+        .arc-reactor.listening::after,
+        .arc-reactor.speaking::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;
+            height: 140%;
+            border: 2px solid var(--aj-glow);
+            border-radius: 50%;
+            animation: ripple 2s linear infinite;
+            pointer-events: none;
+        }
+
+        .arc-reactor.speaking .voice-wave {
+            display: flex !important;
+            opacity: 1 !important;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        /* VOICE WAVEFORM VISUALIZATION */
+        .voice-wave {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; height: 400px;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        
+        /* Realistic Polyline Line Effect from Image */
+        .voice-wave svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .voice-wave polyline {
+            fill: none;
+            stroke: var(--aj-primary);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 12px var(--aj-glow)) drop-shadow(0 0 4px var(--aj-primary));
+            opacity: 0.8;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-line 2s ease-out forwards;
+        }
+
+        @keyframes draw-line {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .voice-wave .line-pulse {
+            animation: pulse-line 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-line {
+            0%, 100% { stroke-width: 3; opacity: 0.8; filter: drop-shadow(0 0 12px var(--aj-glow)); }
+            50% { stroke-width: 5; opacity: 1; filter: drop-shadow(0 0 20px var(--aj-primary)); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { height: 15px; opacity: 0.3; }
+            50% { height: 50px; opacity: 0.9; }
+        }
+        
+        /* HOLOGRAM PROJECTION STYLES */
+        .hologram-display {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 45;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        .hologram-canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            filter: drop-shadow(0 0 40px rgba(0, 242, 255, 0.7)) blur(0.5px);
+        }
+
+        .hologram-object {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+        }
+
+        .suit-part {
+            position: absolute;
+            border: 1px solid rgba(0, 242, 255, 0.8);
+            box-shadow: 0 0 15px var(--aj-glow), inset 0 0 10px rgba(0, 242, 255, 0.2);
+            opacity: 0;
+        }
+
+        .suit-helmet {
+            width: 120px;
+            height: 140px;
+            top: -60px;
+            left: 90px;
+            border-radius: 50% 50% 40% 40%;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 242, 255, 0.05));
+        }
+
+        .suit-chest {
+            width: 140px;
+            height: 160px;
+            top: 0;
+            left: 80px;
+            border-radius: 10px 10px 30px 30px;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 242, 255, 0.05));
+        }
+
+        .suit-left-arm {
+            width: 100px;
+            height: 150px;
+            top: 10px;
+            left: -80px;
+            border-radius: 50px 30px 30px 50px;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 242, 255, 0.05));
+        }
+
+        .suit-right-arm {
+            width: 100px;
+            height: 150px;
+            top: 10px;
+            right: -80px;
+            left: auto;
+            border-radius: 30px 50px 50px 30px;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 242, 255, 0.05));
+        }
+
+        .suit-legs {
+            width: 130px;
+            height: 170px;
+            top: 140px;
+            left: 85px;
+            border-radius: 30px 30px 10px 10px;
+            background: linear-gradient(135deg, rgba(0, 242, 255, 0.2), rgba(0, 242, 255, 0.05));
+        }
+
+        @keyframes buildPart {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotateZ(180deg);
+                filter: blur(10px);
+            }
+            40% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateZ(0deg);
+                filter: blur(0px);
+            }
+        }
+        
+        /* SPEAKING EFFECT */
+        .arc-center.speaking {
+            animation: pulse-speak 0.4s ease-in-out !important;
+        }
+
+        @keyframes pulse-speak {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        /* LISTENING EFFECT */
+        .arc-center.listening {
+            animation: pulse-listen 0.6s ease-in-out infinite !important;
+        }
+
+        @keyframes pulse-listen {
+            0%, 100% { box-shadow: 0 0 40px var(--aj-glow), inset 0 0 20px var(--aj-glow); }
+            50% { box-shadow: 0 0 100px var(--aj-glow), inset 0 0 50px rgba(0, 242, 255, 0.8); }
+        }
+        
+        /* ORBIT SYSTEMS */
+        .orbit-system {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px; height: 500px;
+            z-index: 20;
+        }
+        
+        .orbit-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(0, 242, 255, 0.15);
+            border-radius: 50%;
+            animation: orbit-rotate 25s linear infinite;
+        }
+        
+        .orbit-ring-1 { width: 450px; height: 450px; animation-duration: 25s; }
+        .orbit-ring-2 { width: 550px; height: 550px; animation-duration: 35s; animation-direction: reverse; }
+        
+        @keyframes orbit-rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .orbit-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--aj-accent);
+            box-shadow: 0 0 10px var(--aj-accent);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* FULL HUD VIBRANCY / GLITCH EFFECT */
+        body.system-vibrant .command-panel {
+            border-color: var(--aj-primary);
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.4), inset 0 0 20px rgba(0, 242, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        body.system-vibrant .hud-corner {
+            opacity: 1;
+            filter: drop-shadow(0 0 10px var(--aj-primary));
+            border-width: 2px;
+        }
+
+        body.system-vibrant .arc-reactor {
+            transform: translate(-50%, -50%) scale(1.1);
+            filter: drop-shadow(0 0 30px var(--aj-glow));
+        }
+
+        body.system-vibrant .scan-line {
+            background: linear-gradient(to bottom, transparent, var(--aj-primary), transparent);
+            height: 4px;
+            opacity: 0.8;
+            animation-duration: 1s;
+        }
+
+        @keyframes system-glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        body.system-vibrant .panel-title {
+            color: #fff;
+            text-shadow: 0 0 10px var(--aj-primary);
+        }
+
+        /* COMMAND PANELS */
+        .command-panel {
+            position: absolute;
+            background: rgba(10, 8, 0, 0.25);
+            border: 1.5px solid rgba(212, 175, 55, 0.5);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2), inset 0 0 30px rgba(212, 175, 55, 0.08);
+            padding: 20px;
+            border-radius: 1px;
+        }
+        
+        .panel-top {
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            text-align: center;
+        }
+        
+        .panel-bottom {
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+        }
+        
+        .panel-left {
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 320px;
+        }
+        
+        .panel-right {
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 320px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .terminal-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 250px;
+        }
+
+        .answer-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 250px;
+            border-top: 1px solid rgba(0, 242, 255, 0.2);
+            padding-top: 15px;
+        }
+        
+        .panel-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--aj-accent);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .panel-content {
+            font-size: 12px;
+            color: var(--aj-primary);
+            line-height: 1.8;
+        }
+        
+        /* INPUT AREA */
+        .input-group {
+            margin: 10px 0;
+        }
+        
+        .input-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--aj-accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.15em;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 8px 12px;
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            color: var(--aj-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+        
+        .input-field:focus {
+            border-color: var(--aj-primary);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.4), inset 0 0 10px rgba(0, 242, 255, 0.15);
+            background: rgba(0, 242, 255, 0.15);
+            transform: scale(1.02);
+        }
+        
+        /* BUTTONS */
+        .command-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 242, 255, 0.08);
+            border: 1px solid rgba(0, 242, 255, 0.4);
+            color: var(--aj-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+            margin-top: 10px;
+        }
+        
+        .command-btn:hover {
+            background: rgba(0, 242, 255, 0.15);
+            box-shadow: 0 0 25px var(--aj-glow);
+            border-color: var(--aj-primary);
+        }
+        
+        .command-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* RIGHT OUTPUT PANEL */
+        .panel-right {
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 320px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(1, 4, 9, 0.4);
+        }
+
+        .terminal-container, .answer-container {
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+        }
+
+        .answer-box {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--aj-accent);
+            padding: 10px;
+            background: rgba(0, 242, 255, 0.03);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            font-family: 'Rajdhani', sans-serif;
+            text-shadow: 0 0 5px rgba(230, 241, 255, 0.3);
+        }
+
+        .answer-box::-webkit-scrollbar { width: 4px; }
+        .answer-box::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.2); }
+
+        /* TERMINAL OUTPUT */
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            font-size: 10px;
+            font-family: 'Courier New', monospace;
+            color: var(--aj-primary);
+            line-height: 1.6;
+            padding: 5px;
+        }
+        
+        .terminal-output::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .terminal-output::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .terminal-output::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 2px;
+        }
+        
+        .log-entry {
+            opacity: 0;
+            animation: log-appear 0.3s ease forwards;
+            margin: 2px 0;
+        }
+        
+        @keyframes log-appear {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .log-time {
+            opacity: 0.4;
+            font-size: 9px;
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink-cursor 0.8s step-end infinite;
+            color: var(--aj-primary);
+        }
+
+        @keyframes blink-cursor {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* STATUS INDICATORS */
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        
+        .status-active {
+            background: var(--aj-primary);
+            box-shadow: 0 0 15px var(--aj-primary);
+        }
+        
+        .status-idle {
+            background: rgba(0, 242, 255, 0.4);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* GLITCH EFFECT */
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(-2px, 2px); }
+            66% { transform: translate(2px, -2px); }
+        }
+        
+        .glitch-active {
+            animation: glitch 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <!-- HUD CORNER OVERLAYS -->
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+    
+    <!-- FLOATING DATA STREAM -->
+    <div class="floating-data" style="left: 20px; animation-delay: 0s;">OS_v9.0_NEURAL</div>
+    <div class="floating-data" style="left: 120px; animation-delay: 2s;">ENCRYPT_CORE_64</div>
+    <div class="floating-data" style="right: 50px; animation-delay: 4s;">BIOMETRIC_SYNC</div>
+    <div class="floating-data" style="right: 150px; animation-delay: 1s;">GRID_ALPHA_88</div>
+
+    <div class="aj-container">
+        <!-- ORBIT SYSTEMS -->
+        <div class="orbit-system">
+            <div class="orbit-ring orbit-ring-1">
+                <div class="orbit-dot" style="animation: orbit-rotate 20s linear infinite reverse;"></div>
+            </div>
+            <div class="orbit-ring orbit-ring-2">
+                <div class="orbit-dot" style="animation: orbit-rotate 30s linear infinite;"></div>
+            </div>
+        </div>
+        
+        <!-- VOICE WAVEFORM -->
+        <div class="voice-wave" id="voiceWave"></div>
+        
+        <!-- CENTRAL HOLOGRAPHIC CORE -->
+        <div class="holo-core">
+            <div class="core-shape core-shape-1"></div>
+            <div class="core-shape core-shape-2"></div>
+            <div class="core-shape core-shape-3"></div>
+            <div id="arcReactor" class="arc-center"></div>
+        </div>
+        
+        <!-- TOP STATUS PANEL -->
+        <div class="command-panel panel-top">
+            <div class="panel-title">⧉ AJ STATUS ⧉</div>
+            <div class="panel-content">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span class="status-dot status-active"></span>
+                    <span id="systemStatus">NEURAL LINK ACTIVE</span>
+                </div>
+                <div style="font-size: 10px; opacity: 0.7; margin-top: 8px;">
+                    Uptime: <span id="uptimeCounter" class="aj-font">00:00:00</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- LEFT INPUT PANEL -->
+        <div class="command-panel panel-left">
+            <div class="panel-title">⧈ COMMAND INTERFACE ⧈</div>
+            
+            <div class="input-group">
+                <div class="input-label">Voice Command</div>
+                <textarea id="neural-prompt" class="input-field" style="height: 60px; resize: none;" placeholder="Speak your command..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <div class="input-label">User Identity</div>
+                <input id="feed-data" class="input-field" value="SIR" placeholder="User ID">
+            </div>
+            
+            <button onclick="igniteNeuralLink()" class="command-btn">
+                ▶ ENGAGE NEURAL LINK
+            </button>
+            <button onclick="toggleVoiceInput()" id="voice-btn" class="command-btn">
+                ◉ VOICE INPUT (USER)
+            </button>
+            <button onclick="toggleAIVoice()" id="ai-voice-btn" class="command-btn" style="background: rgba(230, 242, 255, 0.1); border-color: var(--aj-accent);">
+                🔊 AI VOICE: ON
+            </button>
+        </div>
+        
+        <!-- RIGHT OUTPUT PANEL -->
+        <div class="command-panel panel-right">
+            <div class="terminal-container">
+                <div class="panel-title">⧉ NEURAL LOG STREAM ⧉</div>
+                <div id="neural-terminal" class="terminal-output">
+                    <div class="log-entry">
+                        <span class="log-time">[BOOT_SEQUENCE]</span> NEURAL LINK INITIALIZED
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[AWAITING]</span> Input command...
+                    </div>
+                </div>
+            </div>
+
+            <div class="answer-container">
+                <div class="panel-title">⧈ CORE INTELLIGENCE OUTPUT ⧈</div>
+                <div id="ai-answer-box" class="answer-box">
+                    <span style="opacity: 0.4;">Awaiting neural processing...</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BOTTOM STATUS PANEL -->
+        <div class="command-panel panel-bottom">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div class="panel-title" style="margin-bottom: 4px;">◆ AJ INDUSTRIES NEURAL LINK ◆</div>
+                    <span style="font-size: 10px; opacity: 0.6;">V2.0 | DEEPSEEK NEURAL CORE</span>
+                </div>
+                <div style="text-align: right;">
+                    <div style="display: flex; gap: 20px; font-size: 11px;">
+                        <div>
+                            <span class="status-dot status-active" style="background: var(--aj-primary);"></span>
+                            <span>CORE</span>
+                        </div>
+                        <div>
+                            <span id="voice-status-dot" class="status-dot status-idle" style="background: #555;"></span>
+                            <span>VOICE</span>
+                        </div>
+                        <div>
+                            <span class="status-dot status-idle" style="background: #555;"></span>
+                            <span>SYNC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Initialization for AJ
+        window.addEventListener('load', () => {
+            const systemStatus = document.getElementById('systemStatus');
+            if (systemStatus) systemStatus.innerText = "AJ NEURAL LINK ACTIVE";
+            logToTerminal("AJ SYSTEMS ONLINE", "success");
+        });
+
+        // ===== TERMINAL LOGGING (MUST BE FIRST) =====
+        function logToTerminal(msg, type = 'log') {
+            const term = document.getElementById('neural-terminal');
+            if (!term) return console.log(msg); // Fallback if terminal not found
+            
+            const div = document.createElement('div');
+            div.className = 'log-entry';
+            if (type === 'typing') div.classList.add('typing-cursor');
+            
+            const time = new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
+            });
+            
+            let color = 'var(--aj-primary)';
+            if (type === 'error') color = '#ff0055';
+            else if (type === 'success') color = 'var(--aj-accent)';
+            
+            div.innerHTML = `<span class="log-time" style="color: ${color};">[${time}]</span> ${msg}`;
+            div.style.color = color;
+            term.appendChild(div);
+            
+            while (term.children.length > 20) {
+                term.removeChild(term.firstChild);
+            }
+            
+            term.scrollTop = term.scrollHeight;
+            console.log(`[${time}] ${msg}`);
+        }
+
+        // Global Initialization for AJ
+        window.addEventListener('load', () => {
+            const systemStatus = document.getElementById('systemStatus');
+            if (systemStatus) systemStatus.innerText = "AJ NEURAL LINK ACTIVE";
+            logToTerminal("AJ SYSTEMS ONLINE", "success");
+        });
+    </script>
+    
+    <!-- AJ INFRASTRUCTURE -->
+    <script src="aj_agent.js"></script>
+    <script src="core_v19_5.js"></script>
+    
+    <script>
+        // Check if AJ_AI is available after core script loads
+        if (typeof AJ_AI !== 'undefined') {
+            window.AJ_AI = AJ_AI;
+            console.log("[INFRASTRUCTURE] AJ Neural Core detected.");
+        }
+    </script>
+    
+    <script>
+        // CRITICAL SYNC: Ensure global exposure
+        window.addEventListener('load', () => {
+            if (typeof AJ_AI !== 'undefined') {
+                window.AJ_AI = AJ_AI;
+            }
+        });
+
+        // Ensure AJ_AI is detected again on full load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof AJ_AI !== 'undefined') {
+                window.AJ_AI = AJ_AI;
+            }
+        });
+
+        // ===== PERLIN NOISE FOR ORGANIC MOTION =====
+        function hash(x, y) {
+            let h = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+            return h - Math.floor(h);
+        }
+        
+        function smoothstep(t) {
+            return t * t * (3 - 2 * t);
+        }
+        
+        function perlin2D(x, y) {
+            let xi = Math.floor(x);
+            let yi = Math.floor(y);
+            let xf = x - xi;
+            let yf = y - yi;
+            
+            let n00 = hash(xi, yi);
+            let n10 = hash(xi + 1, yi);
+            let n01 = hash(xi, yi + 1);
+            let n11 = hash(xi + 1, yi + 1);
+            
+            let u = smoothstep(xf);
+            let v = smoothstep(yf);
+            
+            let nx0 = (1 - u) * n00 + u * n10;
+            let nx1 = (1 - u) * n01 + u * n11;
+            let result = (1 - v) * nx0 + v * nx1;
+            
+            return result * 2 - 1;
+        }
+        
+        // ===== ULTRA-REALISTIC VOLUMETRIC HOLOGRAM PARTICLE SYSTEM =====
+        class RealisticParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 4;
+                this.vy = (Math.random() - 0.5) * 4;
+                this.ax = 0;
+                this.ay = 0;
+                this.life = 1;
+                this.maxLife = Math.random() * 120 + 60;
+                this.size = Math.random() * 4 + 1.5;
+                this.noise = Math.random();
+                this.trail = [];
+                this.isBright = Math.random() > 0.7; // Some particles are brighter
+            }
+            
+            update(centerX, centerY, time, turbulence) {
+                // Apply Perlin noise for organic turbulent motion
+                let noiseX = perlin2D(this.x * 0.005 + time * 0.05, this.y * 0.005) * turbulence;
+                let noiseY = perlin2D(this.y * 0.005 + time * 0.05 + 1000, this.x * 0.005) * turbulence;
+                
+                // Vortex pull (but weaker for chaotic effect)
+                const dx = centerX - this.x;
+                const dy = centerY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                let pullForce = 0.015;
+                if (dist < 100) pullForce *= 1.5;
+                
+                if (dist > 0.1) {
+                    this.ax = (dx / dist) * pullForce + noiseX;
+                    this.ay = (dy / dist) * pullForce + noiseY;
+                }
+                
+                // Add rotation/spiral
+                let angle = Math.atan2(dy, dx);
+                this.ax += Math.cos(angle + time * 0.02) * 0.15;
+                this.ay += Math.sin(angle + time * 0.02) * 0.15;
+                
+                // Apply forces
+                this.vx += this.ax;
+                this.vy += this.ay;
+                
+                // Damping
+                this.vx *= 0.96;
+                this.vy *= 0.96;
+                
+                // Position
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Life
+                this.life--;
+                
+                // Slight size variation
+                this.size *= 0.995;
+            }
+            
+            draw(ctx, opacity) {
+                const alpha = (this.life / this.maxLife) * opacity;
+                
+                if (this.isBright) {
+                    ctx.fillStyle = `rgba(230, 241, 255, ${alpha * 0.9})`;
+                    ctx.shadowColor = `rgba(0, 242, 255, ${alpha})`;
+                } else {
+                    ctx.fillStyle = `rgba(0, 242, 255, ${alpha * 0.8})`;
+                    ctx.shadowColor = `rgba(0, 242, 255, ${alpha * 0.6})`;
+                }
+                
+                ctx.shadowBlur = this.size * 4;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        class UltraRealisticHologram {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.particles = [];
+                this.time = 0;
+                this.centerX = canvas.width / 2;
+                this.centerY = canvas.height / 2;
+                this.isBuilding = false;
+                this.turbulence = 1;
+            }
+            
+            burst(x, y, count = 100) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 2;
+                    const p = new RealisticParticle(x, y);
+                    p.vx = Math.cos(angle) * speed;
+                    p.vy = Math.sin(angle) * speed;
+                    this.particles.push(p);
+                }
+            }
+            
+            update() {
+                this.time++;
+                
+                // Continuous particle generation with chaotic streams
+                if (this.isBuilding && this.particles.length < 1200) {
+                    // Multiple turbulent streams
+                    for (let i = 0; i < 6; i++) {
+                        const angle = (this.time * 0.08 + (i * Math.PI / 3)) % (Math.PI * 2);
+                        const distance = 250 + Math.sin(this.time * 0.02 + i) * 100;
+                        
+                        const streamX = this.centerX + Math.cos(angle) * distance;
+                        const streamY = this.centerY + Math.sin(angle) * distance;
+                        
+                        // Add multiple particles per stream
+                        for (let j = 0; j < 4; j++) {
+                            const deviation = (Math.random() - 0.5) * 1.5;
+                            const p = new RealisticParticle(streamX, streamY);
+                            p.vx = Math.cos(angle + deviation) * (Math.random() * 2 + 0.5);
+                            p.vy = Math.sin(angle + deviation) * (Math.random() * 2 + 0.5);
+                            this.particles.push(p);
+                        }
+                    }
+                    
+                    // Chaotic bursts from center
+                    if (Math.random() < 0.25) {
+                        this.burst(this.centerX, this.centerY, Math.random() * 50 + 30);
+                    }
+                    
+                    // Random turbulent bursts
+                    if (Math.random() < 0.1) {
+                        const randomX = this.centerX + (Math.random() - 0.5) * 400;
+                        const randomY = this.centerY + (Math.random() - 0.5) * 400;
+                        this.burst(randomX, randomY, Math.random() * 40 + 20);
+                    }
+                }
+                
+                // Update all particles with turbulence
+                this.turbulence = 2 + Math.sin(this.time * 0.03) * 0.5;
+                
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    this.particles[i].update(this.centerX, this.centerY, this.time, this.turbulence);
+                    if (this.particles[i].life <= 0) {
+                        this.particles.splice(i, 1);
+                    }
+                }
+            }
+            
+            draw(buildProgress = 1) {
+                // Dark background with glow
+                this.ctx.fillStyle = 'rgba(1, 4, 9, 0.25)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // --- HOLOGRAPHIC GRID ---
+                this.ctx.strokeStyle = 'rgba(0, 242, 255, 0.08)';
+                this.ctx.lineWidth = 0.5;
+                this.ctx.beginPath();
+                for(let i=0; i<this.canvas.width; i+=40) {
+                    this.ctx.moveTo(i, 0); this.ctx.lineTo(i, this.canvas.height);
+                    this.ctx.moveTo(0, i); this.ctx.lineTo(this.canvas.width, i);
+                }
+                this.ctx.stroke();
+
+                // Intense radial glow
+                const gradient = this.ctx.createRadialGradient(
+                    this.centerX, this.centerY, 0,
+                    this.centerX, this.centerY, 300
+                );
+                gradient.addColorStop(0, `rgba(230, 241, 255, ${0.45 * buildProgress})`);
+                gradient.addColorStop(0.3, `rgba(0, 242, 255, ${0.3 * buildProgress})`);
+                gradient.addColorStop(0.7, `rgba(0, 153, 204, ${0.15 * buildProgress})`);
+                gradient.addColorStop(1, 'rgba(0, 242, 255, 0)');
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Draw all particles
+                const opacity = Math.min(buildProgress, 1);
+                for (let particle of this.particles) {
+                    particle.draw(this.ctx, opacity);
+                }
+                
+                // Outer plasma ring
+                this.ctx.strokeStyle = `rgba(0, 242, 255, ${0.65 * buildProgress})`;
+                this.ctx.lineWidth = 2.5;
+                this.ctx.shadowColor = `rgba(0, 242, 255, ${buildProgress})`;
+                this.ctx.shadowBlur = 40;
+                this.ctx.beginPath();
+                this.ctx.arc(this.centerX, this.centerY, 180 * buildProgress, 0, Math.PI * 2);
+                this.ctx.stroke();
+                
+                // Multiple pulsing rings
+                for (let ring = 0; ring < 5; ring++) {
+                    const pulse = Math.sin(this.time * 0.04 + ring * 0.5) * 0.5 + 0.5;
+                    const radius = 60 + ring * 55;
+                    const alpha = (0.4 - ring * 0.08) * pulse * buildProgress;
+                    
+                    this.ctx.strokeStyle = `rgba(0, 242, 255, ${alpha})`;
+                    this.ctx.lineWidth = 1.5;
+                    this.ctx.beginPath();
+                    
+                    // Spiral ring effect
+                    this.ctx.shadowBlur = 15;
+                    for (let i = 0; i < 360; i += 10) {
+                        const angle = (i * Math.PI / 180) + (this.time * 0.01 * (ring % 2 === 0 ? 1 : -1));
+                        const wobble = Math.sin(i * 0.1 + this.time * 0.05) * (12 + ring);
+                        const x = this.centerX + Math.cos(angle) * (radius + wobble);
+                        const y = this.centerY + Math.sin(angle) * (radius + wobble);
+                        i === 0 ? this.ctx.moveTo(x, y) : this.ctx.lineTo(x, y);
+                    }
+                    this.ctx.closePath();
+                    this.ctx.stroke();
+                }
+            }
+            
+            animate(duration = 4000) {
+                return new Promise(resolve => {
+                    this.isBuilding = true;
+                    const startTime = Date.now();
+                    
+                    const animationLoop = () => {
+                        const elapsed = Date.now() - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        this.update();
+                        this.draw(progress);
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(animationLoop);
+                        } else {
+                            this.isBuilding = false;
+                            // Keep showing for a moment
+                            for (let i = 0; i < 30; i++) {
+                                this.update();
+                                this.draw(1);
+                            }
+                            setTimeout(() => {
+                                resolve();
+                            }, 1000);
+                        }
+                    };
+                    
+                    animationLoop();
+                });
+            }
+        }
+        
+        let hologramSystem = null;
+        
+        // ===== HOLOGRAM BUILDING SYSTEM =====
+        const suitParts = [
+            { class: 'suit-helmet', name: 'HELMET UNIT' },
+            { class: 'suit-chest', name: 'TORSO PLATE' },
+            { class: 'suit-left-arm', name: 'LEFT ARM' },
+            { class: 'suit-right-arm', name: 'RIGHT ARM' },
+            { class: 'suit-legs', name: 'LEG ASSEMBLY' }
+        ];
+
+        async function buildHologram(objectType = 'suit') {
+            logToTerminal(`[HOLOGRAM] MATERIALIZING: ${objectType.toUpperCase()}`, 'log');
+            
+            const arcReactor = document.getElementById('arcReactor');
+            arcReactor.classList.add('listening');
+            
+            // Create canvas-based hologram display
+            let display = document.getElementById('hologramDisplay');
+            if (!display) {
+                display = document.createElement('div');
+                display.id = 'hologramDisplay';
+                display.style.cssText = 'position: absolute; width: 700px; height: 700px; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 45; opacity: 0;';
+                document.querySelector('.aj-container').appendChild(display);
+            }
+            
+            display.innerHTML = '';
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = 700;
+            canvas.height = 700;
+            canvas.style.cssText = 'width: 100%; height: 100%; filter: drop-shadow(0 0 100px rgba(0, 242, 255, 1)) drop-shadow(0 0 60px rgba(0, 153, 204, 0.8));';
+            display.appendChild(canvas);
+            
+            // Initialize ultra-realistic hologram system
+            hologramSystem = new UltraRealisticHologram(canvas);
+            
+            // Fade in display
+            gsap.to(display, { opacity: 1, duration: 0.5 });
+            
+            // Play hologram animation (longer and more intense)
+            await hologramSystem.animate(4500);
+            
+            // Log completion
+            logToTerminal("[CONSTRUCTION] ■ HOLOGRAM MATERIALIZATION COMPLETE ■", "success");
+            
+            // Fade out display
+            gsap.to(display, { opacity: 0, duration: 1.5, delay: 1.5 });
+            
+            arcReactor.classList.remove('listening');
+        }
+
+        // ===== VISUALIZATION ENGINE =====
+        let waveContainer = document.getElementById('voiceWave');
+        
+        function drawWaveform(intensity = 0) {
+            waveContainer.innerHTML = '';
+            
+            // Re-creating the specific "zigzag" line effect from the user's image
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", "0 0 1000 400");
+            
+            const points = [];
+            const segments = 25;
+            const spread = 1000 / segments;
+            
+            for (let i = 0; i <= segments; i++) {
+                const x = i * spread;
+                // Baseline with random sharp "spikes" matching the image
+                const baseHeight = 200;
+                let y = baseHeight + (Math.random() - 0.5) * (50 + intensity * 150);
+                
+                // Keep some points closer to baseline to create the "horizontal" sections seen in the image
+                if (Math.random() > 0.7) y = baseHeight + (Math.random() - 0.5) * 10;
+                
+                points.push(`${x},${y}`);
+            }
+            
+            const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+            polyline.setAttribute("points", points.join(" "));
+            polyline.classList.add("line-pulse");
+            
+            // Add a secondary thinner "echo" line for realism
+            const echoPoints = points.map(p => {
+                const [x, y] = p.split(',').map(Number);
+                return `${x},${y + (Math.random() - 0.5) * 20}`;
+            });
+            const echoLine = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+            echoLine.setAttribute("points", echoPoints.join(" "));
+            echoLine.style.strokeWidth = "1";
+            echoLine.style.opacity = "0.3";
+            
+            svg.appendChild(echoLine);
+            svg.appendChild(polyline);
+            waveContainer.appendChild(svg);
+        }
+        
+        // Continuous animation for the line
+        let waveTime = 0;
+        function animateWave() {
+            if (arcReactor.classList.contains('speaking') || arcReactor.classList.contains('listening')) {
+                drawWaveform(Math.abs(Math.sin(waveTime)) * 1.5);
+            } else {
+                drawWaveform(0.1); // Idle movement
+            }
+            waveTime += 0.1;
+            requestAnimationFrame(animateWave);
+        }
+        
+        animateWave();
+        
+        // Uptime counter
+        let startTime = Date.now();
+        setInterval(() => {
+            let diff = Math.floor((Date.now() - startTime) / 1000);
+            let h = String(Math.floor(diff / 3600)).padStart(2, '0');
+            let m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+            let s = String(diff % 60).padStart(2, '0');
+            const uptime = document.getElementById('uptimeCounter');
+            if (uptime) uptime.innerText = `${h}:${m}:${s}`;
+        }, 1000);
+        
+        // ===== VOICE RECOGNITION ENGINE =====
+        let recognition;
+        let isPersistent = false;
+        
+        // Wrap initialization to ensure elements exist
+        function initRecognition() {
+            const arcReactor = document.getElementById('arcReactor');
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+                
+                recognition.onstart = () => {
+                    if (arcReactor) {
+                        arcReactor.classList.add('listening');
+                        arcReactor.classList.add('speaking');
+                    }
+                    logToTerminal('[VOICE] Listening...', 'log');
+                };
+                
+                recognition.onresult = (event) => {
+                    let finalTranscript = '';
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            finalTranscript += event.results[i][0].transcript;
+                        }
+                    }
+                    
+                    if (finalTranscript) {
+                        document.getElementById('neural-prompt').value = finalTranscript;
+                        logToTerminal(`[INPUT] "${finalTranscript}"`, 'log');
+                        drawWaveform();
+                        igniteNeuralLink();
+                    }
+                };
+                
+                recognition.onerror = (event) => {
+                    logToTerminal(`[ERROR] Voice: ${event.error}`, 'error');
+                    if (isPersistent && (event.error === 'no-speech' || event.error === 'aborted')) {
+                        setTimeout(() => {
+                            try { recognition.start(); } catch(e) {}
+                        }, 500);
+                    }
+                };
+                
+                recognition.onend = () => {
+                    if (arcReactor) arcReactor.classList.remove('listening');
+                    if (isPersistent) {
+                        setTimeout(() => {
+                            try { 
+                                recognition.start(); 
+                                logToTerminal('[VOICE] Link Restored', 'log');
+                            } catch(e) {
+                                console.log("Recognition restart blocked:", e);
+                            }
+                        }, 300);
+                    }
+                };
+            }
+        }
+        
+        // Run init after window loads
+        window.addEventListener('load', initRecognition);
+        
+        // Ensure voices are loaded for human-like communication
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+        }
+
+        function toggleVoiceInput() {
+            if (!recognition) {
+                console.error("Speech recognition not supported or initialized.");
+                return alert("Speech recognition not supported in this browser.");
+            }
+            
+            try {
+                isPersistent = !isPersistent;
+                const voiceBtn = document.getElementById('voice-btn');
+                const voiceStatus = document.getElementById('voice-status-dot');
+                
+                if (isPersistent) {
+                    recognition.start();
+                    logToTerminal('[VOICE] Always-On Activated', 'log');
+                    if (voiceStatus) voiceStatus.style.background = 'var(--aj-primary)';
+                    if (voiceBtn) voiceBtn.innerText = "◉ VOICE INPUT (ACTIVE)";
+                } else {
+                    recognition.stop();
+                    logToTerminal('[VOICE] Standby', 'log');
+                    if (voiceStatus) voiceStatus.style.background = '#555';
+                    if (voiceBtn) voiceBtn.innerText = "◉ VOICE INPUT (USER)";
+                }
+            } catch (err) {
+                console.error("Error toggling voice input:", err);
+                logToTerminal(`[ERROR] Toggle failed: ${err.message}`, 'error');
+                isPersistent = false;
+            }
+        }
+
+        function toggleAIVoice() {
+            if (!window.AJ_AI) return;
+            window.AJ_AI.isSpeakEnabled = !window.AJ_AI.isSpeakEnabled;
+            const btn = document.getElementById('ai-voice-btn');
+            if (window.AJ_AI.isSpeakEnabled) {
+                btn.innerHTML = "🔊 AI VOICE: ON";
+                btn.style.borderColor = "var(--aj-accent)";
+                btn.style.background = "rgba(230, 242, 255, 0.1)";
+                logToTerminal("[SYSTEM] AI Vocal Matrix: ONLINE", "success");
+            } else {
+                btn.innerHTML = "🔇 AI VOICE: OFF";
+                btn.style.borderColor = "#555";
+                btn.style.background = "rgba(85, 85, 85, 0.1)";
+                window.speechSynthesis.cancel();
+                logToTerminal("[SYSTEM] AI Vocal Matrix: SILENCED", "log");
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            // Force registration of AJ_AI to window if it was loaded as a constant
+            if (typeof AJ_AI !== 'undefined') {
+                window.AJ_AI = AJ_AI;
+                console.log("[SYSTEM] AJ Neural Core found and registered.");
+            } else {
+                console.error("[SYSTEM] AJ Neural Core (AJ_AI) not detected.");
+            }
+            
+            drawWaveform();
+            
+            // Listen for AI speech events to control effects
+            window.addEventListener('aj-speaking-start', () => {
+                // Effects are now handled manually in igniteNeuralLink for perfect timing
+            });
+            window.addEventListener('aj-speaking-stop', () => {
+                // Effects are now handled manually in igniteNeuralLink for perfect timing
+            });
+            
+            // System initialization check
+            setTimeout(() => {
+                if (window.AJ_AI || typeof AJ_AI !== 'undefined') {
+                    if (typeof AJ_AI !== 'undefined') window.AJ_AI = AJ_AI;
+                    logToTerminal('[SYSTEM] AJ Core initialized successfully', 'success');
+                } else {
+                    logToTerminal('[CRITICAL] Neural Link Failed: AJ_AI not defined', 'error');
+                }
+            }, 1000);
+        });
+        
+        // ===== COMMAND EXECUTOR =====
+        async function igniteNeuralLink() {
+            const buttons = document.querySelectorAll('.command-btn');
+            const btn = buttons[0];
+            const promptInput = document.getElementById('neural-prompt');
+            const dataInput = document.getElementById('feed-data');
+            const arcReactor = document.getElementById('arcReactor');
+            
+            if (!promptInput.value.trim()) {
+                logToTerminal('[ERROR] Command field is empty', 'error');
+                return;
+            }
+            
+            // CRITICAL SYNC: Ensure AJ_AI is registered to window
+            if (typeof AJ_AI !== 'undefined' && !window.AJ_AI) {
+                window.AJ_AI = AJ_AI;
+            }
+            
+            if (!window.AJ_AI) {
+                logToTerminal('[CRITICAL_ERROR] AJ core not initialized. Refresh page.', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.innerHTML = '⟳ PROCESSING...';
+            logToTerminal('[NEURAL_LINK] Engaging core...', 'log');
+            
+            arcReactor.classList.add('speaking');
+            document.body.classList.add('system-vibrant');
+            
+            try {
+                const structuredData = {
+                    category: promptInput.value,
+                    accused: { name: dataInput.value, statement: "User Command", dept: "CORE" },
+                    victim: { name: "AJ", statement: "Status Query", dept: "CORE" },
+                    witnesses: []
+                };
+                
+                                logToTerminal('[PROCESSING] Analyzing command structure...', 'log');
+                
+                // Show thinking state on reactor
+                arcReactor.classList.add('listening'); 
+                
+                const responseData = await window.AJ_AI.process(structuredData, 'judge');
+                
+                arcReactor.classList.remove('listening');
+                
+                // responseData is now the raw answer
+                const actualAnswer = responseData;
+
+                // Update the dedicated Answer Box
+                const answerBox = document.getElementById('ai-answer-box');
+                if (answerBox) {
+                    answerBox.innerHTML = `<span class="log-time" style="color: var(--aj-accent); opacity: 0.6; font-size: 10px;">[${new Date().toLocaleTimeString('en-US', { hour12: false })}]</span><br>${actualAnswer}`;
+                    answerBox.scrollTop = answerBox.scrollHeight;
+                }
+
+                logToTerminal('[OUTPUT_READY]', 'success');
+                
+                // START EFFECT AND SPEECH SIMULTANEOUSLY
+                arcReactor.classList.add('speaking');
+                document.body.classList.add('system-vibrant');
+                
+                // PASS ENTIRE TEXT FOR SPEECH (NO TRUNCATION)
+                const speechPromise = window.AJ_AI.speak(actualAnswer);
+
+                async function typeLine(text) {
+                    return new Promise(resolve => {
+                        const term = document.getElementById('neural-terminal');
+                        const lineEl = document.createElement('div');
+                        lineEl.className = 'log-entry typing-cursor';
+                        lineEl.innerHTML = `<span class="log-time">[${new Date().toLocaleTimeString('en-US', { hour12: false })}]</span> `;
+                        term.appendChild(lineEl);
+
+                        let i = 0;
+                        function type() {
+                            if (i < text.length) {
+                                lineEl.innerHTML = `<span class="log-time">[${new Date().toLocaleTimeString('en-US', { hour12: false })}]</span> ${text.slice(0, i + 1)}`;
+                                i++;
+                                if (term) term.scrollTop = term.scrollHeight;
+                                setTimeout(type, 15);
+                            } else {
+                                lineEl.classList.remove('typing-cursor');
+                                resolve();
+                            }
+                        }
+                        type();
+                    });
+                }
+
+                await typeLine(actualAnswer);
+                await speechPromise;
+
+                const input = promptInput.value.toLowerCase();
+                if (input.includes('build') || input.includes('create') || input.includes('construct')) {
+                    const objectType = input.split(/build|create|construct/i)[1]?.trim() || 'suit';
+                    await buildHologram(objectType);
+                }
+                
+                // Keep vibrant for a 3-second cool-down after speech finishes
+                setTimeout(() => {
+                    arcReactor.classList.remove('speaking');
+                    document.body.classList.remove('system-vibrant');
+                }, 3000);
+
+                btn.disabled = false;
+                btn.innerHTML = '▶ ENGAGE NEURAL LINK';
+                promptInput.value = '';
+                drawWaveform();
+            } catch (err) {
+                console.error('Neural Link Error:', err);
+                logToTerminal('[CRITICAL_ERROR] ' + (err.message || 'Unknown error'), 'error');
+                btn.disabled = false;
+                btn.innerHTML = '▶ ENGAGE NEURAL LINK';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
