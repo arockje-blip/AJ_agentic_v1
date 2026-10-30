@@ -110,6 +110,11 @@
     status_diagnostics: "status", scheduling_reminders: "notes", personal_admin_lifestyle: "notes", workshop_studio_ops: "notes",
   };
   const THRESH = 0.45;
+  const ACKS = [
+    [/^\s*(good,?\s*)?(thanks|thank you|thx|ty)\b/i, () => pick([`Anytime, ${U()}.`, `Glad to help, ${U()}.`])],
+    [/^\s*(sure|ok|okay|yes|yeah|yep|alright|cool|fine|nice)\s*[.!]*\s*$/i, () => pick([`Noted.`, `Understood. What's next, ${U()}?`])],
+    [/\bi love you\b/i, () => `Appreciated, ${U()}. I'm code and weights, but I'm glad this build works for you.`],
+  ];
   // Hard rules beat the net on keywords it is known to be weak on.
   const RULES = [
     [/\b(remind me|set a reminder|set an alarm|wake me)\b/i, "scheduling_reminders"],
@@ -137,7 +142,8 @@
     if (c.confidence < THRESH && hits[0] && hits[0].score > 0.6) intent = hits[0].intent; // retrieval tie-break
 
     let text = null, tool = null;
-    if (/\b(what('?s| is) the (time|date)|time now|what day is it|today'?s date|current time)\b/i.test(input)) {
+    for (const [re, fn] of ACKS) if (re.test(input)) { text = fn(); tool = "ack"; trace.push({ step: "ack" }); break; }
+    if (text === null && /\b(what('?s| is) the (time|date)|time now|what day is it|today'?s date|current time)\b/i.test(input)) {
       tool = "clock"; text = tools.clock(input); trace.push({ step: "tool", tool, handled: text !== null });
     }
     if (text === null && intent !== "llm_fallback" && (c.confidence >= THRESH * 0.8 || intent !== c.intent)) {
@@ -148,7 +154,7 @@
     if (text === null) { // reflect: tool declined or no tool -> RAG + LLM
       const context = [...docs.map((d) => d.text), ...hits.filter((h) => h.score > 0.5).map((h) => `Related request (${h.intent}): ${h.text}`)].join("\n").slice(0, 1400);
       try { text = await llm(input, ctx, context); tool = "rag_llm"; }
-      catch (e) { text = "Backend unreachable. Local core only — try a status, note, or time command."; tool = "offline"; }
+      catch (e) { text = `Backend unreachable (${e.message}). Local core only — try a status, note, or time command.`; tool = "offline"; }
       trace.push({ step: "llm", tool });
     }
     return { text, intent, confidence: c.confidence, tool, trace };

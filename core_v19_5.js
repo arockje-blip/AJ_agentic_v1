@@ -3056,7 +3056,7 @@ const AJ_AI = {
         // Priority 1: Check Local Hardcoded Logic Database (Case-Insensitive, 800+ prompts with 10 randomized answers each)
         for (let key in this.logicLibrary) {
             const normalizedKey = key.toLowerCase().trim();
-            if (command.includes(normalizedKey) || normalizedKey.includes(command)) {
+            if (command === normalizedKey || (normalizedKey.length >= 6 && new RegExp('(^|\\s)' + normalizedKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|\\s)').test(command))) {
                 const response = this.logicLibrary[key]();
                 return String(response);
             }
